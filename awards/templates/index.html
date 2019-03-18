@@ -1,0 +1,67 @@
+{%extends 'base.html' %}
+{% load bootstrap3 %}
+{% load static %}
+
+
+
+{% block styles%}
+{{block.super}}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+
+ <link href="https://fonts.googleapis.com/css?family=Boogaloo|Fredoka+One|Lalezar|Patrick+Hand" rel="stylesheet"> 
+{% endblock %}
+
+
+
+{% block content %}
+<div class="container-fluid">
+  {% for pro in projects %}
+  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+    <div class="well">
+      <div class="item">
+        <a href="/viewproject/{{pro.id}}"><img src="{{pro.landing_page.url}}" class="img-responsive"><p class="view">View Project</p></a> 
+      </div>
+      <br>
+  <p class="title">{{pro.title}}</p>
+  <ul class="list-inline">
+     <li class="list-inline-item">
+ <h4>Rate By Design</h4>
+<form  action="/project/{{pro.id}}/review_design/" method="POST">
+   {%csrf_token%}
+   {% bootstrap_form form layout='inline' %}
+   <input type="submit" value="Rate">
+ </form>
+   <p>{{ pro.rating.count }} <p style="color: green;">Design</h5>  average = {{ pro.average_design | floatformat }} </p>
+   </li>
+    <li class="list-inline-item">
+ <h4>Rate By Content</h4>
+<form  action="/project/{{pro.id}}/review_content/" method="POST">
+   {%csrf_token%}
+   {% bootstrap_form form layout='inline' %}
+   <input type="submit" value="Rate">
+ </form>
+   <p>{{ pro.rating.count }} <p style="color: green;">Content</h5>  average = {{ pro.average_content | floatformat }} </p>
+      </li>
+  <li class="list-inline-item">
+ <h4>Rate By Usability</h4>
+<form  action="/project/{{pro.id}}/review_usability/" method="POST">
+   {%csrf_token%}
+   {% bootstrap_form form layout='inline' %}
+   <input type="submit" value="Rate">
+ </form>
+   <p>{{ pro.rating.count }} <p style="color: green;">Usability</h5>  average = {{ pro.average_usability | floatformat }} </p>
+    </li>
+    </ul>
+  {% if pro.profile.profile_pic %}
+  <a href="/user/{{pro.user_id}}"><p class="user"> <img src="{{pro.profile.profile_pic.url}}" id="me" class="img-circle"> By {{pro.user.username}}</p></a>
+ 
+   {%else%}
+   <a href="/user/{{pro.user_id}}"><p class="user"> <img src="/static/img/avatar.png" id="me" class="img-circle"> By {{pro.user.username}}</p></a>
+    {% endif %}
+   <p class="time">{{pro.posted_on}}</p>
+      </div>
+  </div>
+
+  {% endfor%}
+</div>
+{% endblock%}

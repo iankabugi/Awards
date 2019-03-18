@@ -1,0 +1,45 @@
+{%extends "registration/base.html"%} {% load bootstrap3 %} {% load static %} {% block styles%} {{block.super}}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+<link href="https://fonts.googleapis.com/css?family=Skranji" rel="stylesheet"> {% endblock %} {% block content %}
+<div class="container">
+    <div class="row">
+        <!-- Empty div -->
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            {% if form.errors %}
+            <p> Password or Username is incorrect </p>
+            {% endif %}
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    <h3 class="text-center">Sign In</h3>
+                </div>
+                <div class="panel-body">
+
+                    <form action="/accounts/login/" method="post">
+                        {% csrf_token %} {% bootstrap_form form%}
+
+                        <div class="form-group">
+
+                            <input type="submit" class="btn btn-info btn-md" value="Login">
+                            <br>
+                            <br>
+                            <p>Don't have an account? <a href="/accounts/register/">Sign up</a>
+
+                        </div>
+
+                        <input type="hidden" name="next" value="{{next}}">
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- empty div -->
+        <div class="col-md-4"></div>
+    </div>
+</div>
+
+{% endblock %}

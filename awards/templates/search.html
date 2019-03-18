@@ -1,0 +1,31 @@
+{%extends 'base.html' %}
+{% load static %}
+
+
+{% block styles%}
+{{block.super}}
+<link rel="stylesheet" href="{% static 'css/search.css' %}">
+  <link href="https://fonts.googleapis.com/css?family=Bowlby+One+SC" rel="stylesheet"> 
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+
+  <div class="row">
+    {% if pros %}
+      <h2>Found {{ pros|length }} project(s) with that title "{{message}}"</h2>
+    {% else %}
+      <h2> Found 0 projects for the search term {{message}}</h2>
+    {% endif %}
+  </div>
+  <hr>
+    {% for pro in pros %}
+  
+  <a href="/viewproject/{{pro.id}}"><p>{{pro.title}}</p></a>
+
+    {% endfor%}
+    </div>
+
+
+{% endblock%}

@@ -1,0 +1,48 @@
+{%extends 'base.html' %}
+{% load static %}
+
+
+{% block styles%}
+{{block.super}}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+ <link href="https://fonts.googleapis.com/css?family=Boogaloo|Fredoka+One|Lalezar|Patrick+Hand|Overlock" rel="stylesheet"> 
+{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+<div class="container">
+<div class="col-md-4">
+<ul>
+<li><img src="/static/img/cell.png" class="reach"><span class="tooltiptext1">{{profiles.contact}}</span></li>
+<li><img src="/static/img/email.png" class="reach">  <span class="tooltiptext1">{{profiles.user.email}}</span></li>
+</ul>
+ </div>
+<div class="col-md-5">
+{% if profiles.profile_pic %}  
+<figure>
+    <img src="{{profiles.profile_pic.url}}" id="me">
+ 
+     <figcaption>{{profiles.user.username}}</figcaption>
+    
+</figure>
+     {%else%}
+    <figure>
+   <img src="/static/img/avatar.png" class="img-circle">
+    <figcaption>{{profiles.user.username}}</figcaption>
+</figure>
+    {% endif %}
+ </div>
+</div>
+</div>
+<blockquote>{{profiles.bio}}</blockquote>
+ {% for pro in pros %}
+  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+  <div class="item">
+<a href="/viewproject/{{pro.id}}"><img src="{{pro.landing_page.url}}" class="img-responsive" id="zote"><p class="view">View Project</p></a> 
+  </div>
+    </div>
+
+{% endfor%}
+
+
+{% endblock%}
