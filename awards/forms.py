@@ -5,23 +5,28 @@ from .models import Project, Profile, DesignRating, UsabilityRating, ContentRati
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
-        exclude = ['user','profile','posted_on']
+        exclude = ['user', 'profile', 'posted_on']
+
 
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         exclude = ['user']
+
+
 class DesignForm(forms.ModelForm):
-   class Meta:
-       model = DesignRating
-       fields = ['rating']
+    class Meta:
+        model = DesignRating
+        fields = ['rating']
+
 
 class UsabilityForm(forms.ModelForm):
-   class Meta:
-       model = UsabilityRating
-       fields = ['rating']
+    class Meta:
+        model = UsabilityRating
+        fields = ['rating']
+
 
 class ContentForm(forms.ModelForm):
-   class Meta:
-       model = ContentRating
-       fields = ['rating']
+    class Meta:
+        model = ContentRating
+        fields = ['rating']
