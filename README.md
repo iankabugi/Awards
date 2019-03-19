@@ -63,7 +63,7 @@ The test are doen to affirm app functionality
 
 The app was deployed to heroku:
 
-https://bugiaward.herokuapp.com/
+https://bugiawards.herokuapp.com/
 
 ## Built With
 
